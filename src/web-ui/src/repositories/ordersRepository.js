@@ -5,7 +5,9 @@ import axios from "axios";
 
 const serviceDomain = process.env.VUE_APP_ORDERS_SERVICE_DOMAIN;
 const servicePort = process.env.VUE_APP_ORDERS_SERVICE_PORT;
-const baseURL = `${serviceDomain}:${servicePort}`;
+const baseURL = (servicePort !== "80" && !isNaN(servicePort) && servicePort) ?
+     `${serviceDomain}:${servicePort}`:
+      serviceDomain;
 
 const connection = axios.create({
     baseURL
